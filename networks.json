@@ -3,6 +3,12 @@
     "AirnodeRrpV0": {
       "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd",
       "startBlock": 14616838
+    },
+    "Api3ServerV1": {
+      "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76"
+    },
+    "OrderPayable": {
+      "address": "0x045808285C69014Beb9f70447155A4c55376fc06"
     }
   }
 }

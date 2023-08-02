@@ -1,0 +1,43 @@
+# NOTE: Keep in sync with other configuration ignore files
+
+# Package directories & files
+/node_modules
+*.tgz
+# Ignore dist and build folder in every (sub)folder
+dist
+build
+
+# TypeScript build files
+*.tsbuildinfo
+
+# IDE specific files
+.vscode
+.idea
+
+# Coverage
+/coverage
+
+# Log files
+*.log
+
+# Config files
+airseeker*.json
+*.env
+!*.example.*
+
+# Hardhat files
+cache
+
+# Ignore log files
+logs
+*.log
+
+# Ignore Serverless directories
+.serverless
+.build
+
+# Vercel ncc build files
+ncc
+
+# Generated schemas by The Graph utilities
+/generated

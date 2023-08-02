@@ -97,3 +97,86 @@ type SetSponsorshipStatus @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+type SetDapiName @entity(immutable: true) {
+  id: Bytes!
+  dataFeedId: Bytes! # bytes32
+  dapiName: Bytes! # bytes32
+  sender: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UpdatedBeaconSetWithBeacons @entity(immutable: true) {
+  id: Bytes!
+  beaconSetId: Bytes! # bytes32
+  value: BigInt! # int224
+  timestamp: BigInt! # uint32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UpdatedBeaconWithSignedData @entity(immutable: true) {
+  id: Bytes!
+  beaconId: Bytes! # bytes32
+  value: BigInt! # int224
+  timestamp: BigInt! # uint32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UpdatedOevProxyBeaconSetWithSignedData @entity(immutable: true) {
+  id: Bytes!
+  beaconSetId: Bytes! # bytes32
+  proxy: Bytes! # address
+  updateId: Bytes! # bytes32
+  value: BigInt! # int224
+  timestamp: BigInt! # uint32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UpdatedOevProxyBeaconWithSignedData @entity(immutable: true) {
+  id: Bytes!
+  beaconId: Bytes! # bytes32
+  proxy: Bytes! # address
+  updateId: Bytes! # bytes32
+  value: BigInt! # int224
+  timestamp: BigInt! # uint32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Withdrew @entity(immutable: true) {
+  id: Bytes!
+  oevProxy: Bytes! # address
+  oevBeneficiary: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+type PaidForOrder @entity(immutable: true) {
+  id: Bytes!
+  orderId: Bytes! # bytes32
+  expirationTimestamp: BigInt! # uint256
+  orderSigner: Bytes! # address
+  amount: BigInt! # uint256
+  sender: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OrderPayableWithdrew @entity(immutable: true) {
+  id: Bytes!
+  recipient: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
