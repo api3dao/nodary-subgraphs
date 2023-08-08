@@ -1,14 +1,101 @@
 {
-  "mainnet": {
-    "AirnodeRrpV0": {
-      "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd",
-      "startBlock": 14616838
-    },
-    "Api3ServerV1": {
-      "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76"
-    },
-    "OrderPayable": {
-      "address": "0x045808285C69014Beb9f70447155A4c55376fc06"
-    }
+  "arbitrum": {
+    "AirnodeRrpV0": { "address": "0xb015ACeEdD478fc497A798Ab45fcED8BdEd08924", "startBlock": 10111151 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 70478684 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 94242635 }
+  },
+  "arbitrum-goerli-testnet": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 665564 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 11748727 }
+  },
+  "avalanche": {
+    "AirnodeRrpV0": { "address": "0xC02Ea0f403d5f3D45a4F1d0d817e7A2601346c9E", "startBlock": 13632091 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 27521435 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 30469801 }
+  },
+  "avalanche-testnet": {
+    "AirnodeRrpV0": { "address": "0x7f5AF7a37a33898544717AAa6c35c111dCe95b28" },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76" }
+  },
+  "bsc": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 17087177 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 26520957 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 28515860 }
+  },
+  "bsc-testnet": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd" },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76" }
+  },
+  "ethereum": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 14616838 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 16842021 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 17335203 }
+  },
+  "ethereum-goerli-testnet": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 6743089 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 8665874 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 9138535 }
+  },
+  "ethereum-sepolia-testnet": {
+    "AirnodeRrpV0": { "address": "0x2ab9f26E18B64848cd349582ca3B55c2d06f507d", "startBlock": 1933221 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 3103453 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 3642159 }
+  },
+  "fantom": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 36468385 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 57720802 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 63041207 }
+  },
+  "fantom-testnet": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 8724171 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 14541214 }
+  },
+  "gnosis": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd" },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76" },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06" }
+  },
+  "gnosis-testnet": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd" },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76" }
+  },
+  "moonbeam": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 854061 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 3153187 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 3636977 }
+  },
+  "moonbeam-testnet": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd" },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76" }
+  },
+  "moonriver": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 1723380 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 3832943 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 4314286 }
+  },
+  "optimism": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 6028115 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 81462409 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 101351571 }
+  },
+  "optimism-goerli-testnet": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 1976658 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 6779277 }
+  },
+  "polygon": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 27332159 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 40421857 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 43125869 }
+  },
+  "polygon-testnet": {
+    "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 26000024 },
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 33191556 }
+  },
+  "polygon-zkevm": {
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 336 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 407886 }
+  },
+  "polygon-zkevm-goerli-testnet": {
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 147622 }
   }
 }
