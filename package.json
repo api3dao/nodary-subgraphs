@@ -8,11 +8,26 @@
     "create-local": "graph create --node http://localhost:8020/ bdrhn9/subgraphs",
     "remove-local": "graph remove --node http://localhost:8020/ bdrhn9/subgraphs",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 bdrhn9/subgraphs",
-    "test": "graph test"
+    "test": "graph test",
+    "prettier:check": "prettier --check \"./**/*.{js,ts,md,json,json.example}\"",
+    "prettier:write": "prettier --write \"./**/*.{js,ts,md,json,json.example}\"",
+    "create-networks-file": "ts-node scripts/create-networks-file.ts",
+    "create-networks-file:mainnets": "ts-node scripts/create-networks-file.ts --only-mainnets",
+    "create-networks-file:testnets": "ts-node scripts/create-networks-file.ts --only-testnets"
   },
   "dependencies": {
+    "@api3/airnode-protocol": "^0.12.0",
+    "@api3/airnode-protocol-v1": "^2.8.0",
+    "@api3/chains": "^3.3.0",
     "@graphprotocol/graph-cli": "0.53.0",
-    "@graphprotocol/graph-ts": "0.30.0"
+    "@graphprotocol/graph-ts": "0.30.0",
+    "axios": "^1.4.0"
   },
-  "devDependencies": { "matchstick-as": "0.5.0" }
+  "devDependencies": {
+    "@types/node": "^20.4.8",
+    "matchstick-as": "0.5.0",
+    "prettier": "^3.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
 }
