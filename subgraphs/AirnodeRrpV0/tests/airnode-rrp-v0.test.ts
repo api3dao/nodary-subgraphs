@@ -9,8 +9,8 @@ import {
 import { Bytes, Address, BigInt } from "@graphprotocol/graph-ts"
 import { CreatedTemplate } from "../generated/schema"
 import { CreatedTemplate as CreatedTemplateEvent } from "../generated/AirnodeRrpV0/AirnodeRrpV0"
-import { handleCreatedTemplate } from "../src/airnode-rrp-v-0"
-import { createCreatedTemplateEvent } from "./airnode-rrp-v-0-utils"
+import { handleCreatedTemplate } from "../src/airnode-rrp-v0"
+import { createCreatedTemplateEvent } from "./airnode-rrp-v0-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0

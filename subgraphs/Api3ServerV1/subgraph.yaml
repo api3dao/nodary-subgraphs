@@ -1,0 +1,39 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Api3ServerV1
+    network: mainnet
+    source:
+      address: "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76"
+      abi: Api3ServerV1
+      startBlock: 16842021
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - SetDapiName
+        - UpdatedBeaconSetWithBeacons
+        - UpdatedBeaconWithSignedData
+        - UpdatedOevProxyBeaconSetWithSignedData
+        - UpdatedOevProxyBeaconWithSignedData
+        - Withdrew
+      abis:
+        - name: Api3ServerV1
+          file: ./../../abis/Api3ServerV1.json
+      eventHandlers:
+        - event: SetDapiName(indexed bytes32,indexed bytes32,address)
+          handler: handleSetDapiName
+        - event: UpdatedBeaconSetWithBeacons(indexed bytes32,int224,uint32)
+          handler: handleUpdatedBeaconSetWithBeacons
+        - event: UpdatedBeaconWithSignedData(indexed bytes32,int224,uint32)
+          handler: handleUpdatedBeaconWithSignedData
+        - event: UpdatedOevProxyBeaconSetWithSignedData(indexed bytes32,indexed address,indexed bytes32,int224,uint32)
+          handler: handleUpdatedOevProxyBeaconSetWithSignedData
+        - event: UpdatedOevProxyBeaconWithSignedData(indexed bytes32,indexed address,indexed bytes32,int224,uint32)
+          handler: handleUpdatedOevProxyBeaconWithSignedData
+        - event: Withdrew(indexed address,address,uint256)
+          handler: handleWithdrew
+      file: ./src/api-3-server-v-1.ts

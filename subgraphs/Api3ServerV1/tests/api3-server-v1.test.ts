@@ -9,8 +9,8 @@ import {
 import { Bytes, Address, BigInt } from "@graphprotocol/graph-ts"
 import { SetDapiName } from "../generated/schema"
 import { SetDapiName as SetDapiNameEvent } from "../generated/Api3ServerV1/Api3ServerV1"
-import { handleSetDapiName } from "../src/api-3-server-v-1"
-import { createSetDapiNameEvent } from "./api-3-server-v-1-utils"
+import { handleSetDapiName } from "../src/api3-server-v1"
+import { createSetDapiNameEvent } from "./api3-server-v1-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0

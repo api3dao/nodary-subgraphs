@@ -102,13 +102,13 @@ export function handleWithdrew(event: WithdrewEvent): void {
   let entity = new Withdrew(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  // entity.user = event.params.user
-  // entity.withdrawalHash = event.params.withdrawalHash
-  // entity.amount = event.params.amount
-  // entity.expirationTimestamp = event.params.expirationTimestamp
-  // entity.withdrawalSigner = event.params.withdrawalSigner
-  // entity.withdrawalDestination = event.params.withdrawalDestination
-  // entity.withdrawalLimit = event.params.withdrawalLimit
+  entity.user = event.params.user
+  entity.withdrawalHash = event.params.withdrawalHash
+  entity.amount = event.params.amount
+  entity.expirationTimestamp = event.params.expirationTimestamp
+  entity.withdrawalSigner = event.params.withdrawalSigner
+  entity.withdrawalDestination = event.params.withdrawalDestination
+  entity.withdrawalLimit = event.params.withdrawalLimit
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp

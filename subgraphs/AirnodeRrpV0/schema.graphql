@@ -1,0 +1,99 @@
+type CreatedTemplate @entity(immutable: true) {
+  id: Bytes!
+  templateId: Bytes! # bytes32
+  airnode: Bytes! # address
+  endpointId: Bytes! # bytes32
+  parameters: Bytes! # bytes
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FailedRequest @entity(immutable: true) {
+  id: Bytes!
+  airnode: Bytes! # address
+  requestId: Bytes! # bytes32
+  errorMessage: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FulfilledRequest @entity(immutable: true) {
+  id: Bytes!
+  airnode: Bytes! # address
+  requestId: Bytes! # bytes32
+  data: Bytes! # bytes
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FulfilledWithdrawal @entity(immutable: true) {
+  id: Bytes!
+  airnode: Bytes! # address
+  sponsor: Bytes! # address
+  withdrawalRequestId: Bytes! # bytes32
+  sponsorWallet: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MadeFullRequest @entity(immutable: true) {
+  id: Bytes!
+  airnode: Bytes! # address
+  requestId: Bytes! # bytes32
+  requesterRequestCount: BigInt! # uint256
+  chainId: BigInt! # uint256
+  requester: Bytes! # address
+  endpointId: Bytes! # bytes32
+  sponsor: Bytes! # address
+  sponsorWallet: Bytes! # address
+  fulfillAddress: Bytes! # address
+  fulfillFunctionId: Bytes! # bytes4
+  parameters: Bytes! # bytes
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MadeTemplateRequest @entity(immutable: true) {
+  id: Bytes!
+  airnode: Bytes! # address
+  requestId: Bytes! # bytes32
+  requesterRequestCount: BigInt! # uint256
+  chainId: BigInt! # uint256
+  requester: Bytes! # address
+  templateId: Bytes! # bytes32
+  sponsor: Bytes! # address
+  sponsorWallet: Bytes! # address
+  fulfillAddress: Bytes! # address
+  fulfillFunctionId: Bytes! # bytes4
+  parameters: Bytes! # bytes
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RequestedWithdrawal @entity(immutable: true) {
+  id: Bytes!
+  airnode: Bytes! # address
+  sponsor: Bytes! # address
+  withdrawalRequestId: Bytes! # bytes32
+  sponsorWallet: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SetSponsorshipStatus @entity(immutable: true) {
+  id: Bytes!
+  sponsor: Bytes! # address
+  requester: Bytes! # address
+  sponsorshipStatus: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
