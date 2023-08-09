@@ -29,12 +29,14 @@
   "ethereum": {
     "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 14616838 },
     "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 16842021 },
-    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 17335203 }
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 17335203 },
+    "PrepaymentDepository": { "address": "0x8367a2a08e46e0BA57CF1a24412E5AF7b4236D93", "startBlock": 17173868 }
   },
   "ethereum-goerli-testnet": {
     "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 6743089 },
     "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 8665874 },
-    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 9138535 }
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 9138535 },
+    "PrepaymentDepository": { "address": "0x7A175B0C798bDD6C0Ea10C9d82dcd40a05e0F672", "startBlock": 9177621 }
   },
   "ethereum-sepolia-testnet": {
     "AirnodeRrpV0": { "address": "0x2ab9f26E18B64848cd349582ca3B55c2d06f507d", "startBlock": 1933221 },
@@ -89,7 +91,8 @@
   },
   "polygon-testnet": {
     "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 26000024 },
-    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 33191556 }
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 33191556 },
+    "PrepaymentDepository": { "address": "0x7A175B0C798bDD6C0Ea10C9d82dcd40a05e0F672", "startBlock": 36840093 }
   },
   "polygon-zkevm": {
     "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 336 },

@@ -138,7 +138,7 @@ export const prepareOrderPayable = async (chainAlias: string): Promise<ContractM
 
   const address = referencesV1.OrderPayable[chainId];
   if (!address) {
-    console.log(`OrderPayable deployment not found for chain with the id ${chainId}, skipping adding Api3ServerV1`);
+    console.log(`OrderPayable deployment not found for chain with the id ${chainId}, skipping adding OrderPayable`);
     return;
   }
 
@@ -147,6 +147,24 @@ export const prepareOrderPayable = async (chainAlias: string): Promise<ContractM
     return { address, startBlock };
   } catch (error) {
     console.log(`Failed to get startBlock for OrderPayable on ${chainAlias}, skipping adding startBlock, ${error}`);
+    return { address };
+  }
+};
+
+export const preparePrepaymentDepository = async (chainAlias: string): Promise<ContractMeta> => {
+  const chainId = getChainId(chainAlias);
+
+  const address = referencesV1.PrepaymentDepository[chainId];
+  if (!address) {
+    console.log(`PrepaymentDepository deployment not found for chain with the id ${chainId}, skipping adding PrepaymentDepository`);
+    return;
+  }
+
+  try {
+    const startBlock = await getStartBlockForContract(chainAlias, address);
+    return { address, startBlock };
+  } catch (error) {
+    console.log(`Failed to get startBlock for PrepaymentDepository on ${chainAlias}, skipping adding startBlock, ${error}`);
     return { address };
   }
 };

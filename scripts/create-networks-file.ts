@@ -1,4 +1,4 @@
-import { prepareAirnodeRrpV0, prepareApi3ServerV1, prepareOrderPayable } from './evm';
+import { prepareAirnodeRrpV0, prepareApi3ServerV1, prepareOrderPayable, preparePrepaymentDepository } from './evm';
 import { Network } from './types';
 import { sleep, writeJsonFile } from './utils';
 
@@ -52,12 +52,15 @@ const main = async () => {
     const Api3ServerV1 = await prepareApi3ServerV1(chainAlias);
     await sleep(10000);
     const OrderPayable = await prepareOrderPayable(chainAlias);
+    await sleep(10000);
+    const PrepaymentDepository = await preparePrepaymentDepository(chainAlias);
     return [
       chainAlias,
       {
         AirnodeRrpV0,
         Api3ServerV1,
         OrderPayable,
+        PrepaymentDepository,
       },
     ];
   });
