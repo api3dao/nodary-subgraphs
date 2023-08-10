@@ -39,5 +39,5 @@ logs
 # Vercel ncc build files
 ncc
 
-# Generated schemas by The Graph utilities
-/generated
+# Subgraph manifests
+/subgraphs/*/subgraph.yaml

@@ -4,9 +4,9 @@ schema:
 dataSources:
   - kind: ethereum
     name: PrepaymentDepository
-    network: ethereum
+    network: mainnet
     source:
-      address: '0x8367a2a08e46e0BA57CF1a24412E5AF7b4236D93'
+      address: "0x8367a2a08e46e0BA57CF1a24412E5AF7b4236D93"
       abi: PrepaymentDepository
       startBlock: 17173868
     mapping:
@@ -34,7 +34,6 @@ dataSources:
           handler: handleIncreasedUserWithdrawalLimit
         - event: SetWithdrawalDestination(indexed address,address)
           handler: handleSetWithdrawalDestination
-        - event: Withdrew(indexed address,indexed
-            bytes32,uint256,uint256,address,address,uint256)
+        - event: Withdrew(indexed address,indexed bytes32,uint256,uint256,address,address,uint256)
           handler: handleWithdrew
       file: ./src/prepayment-depository.ts

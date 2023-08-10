@@ -31,4 +31,5 @@ secrets.env
 ncc
 
 # Generated schemas by The Graph utilities
-/generated
+/subgraphs/*/generated
+/abis
