@@ -1,5 +1,5 @@
-import { newMockEvent } from "matchstick-as"
-import { ethereum, Bytes, Address, BigInt } from "@graphprotocol/graph-ts"
+import { newMockEvent } from 'matchstick-as';
+import { ethereum, Bytes, Address, BigInt } from '@graphprotocol/graph-ts';
 import {
   CreatedTemplate,
   FailedRequest,
@@ -8,8 +8,8 @@ import {
   MadeFullRequest,
   MadeTemplateRequest,
   RequestedWithdrawal,
-  SetSponsorshipStatus
-} from "../generated/AirnodeRrpV0/AirnodeRrpV0"
+  SetSponsorshipStatus,
+} from '../generated/AirnodeRrpV0/AirnodeRrpV0';
 
 export function createCreatedTemplateEvent(
   templateId: Bytes,
@@ -17,83 +17,44 @@ export function createCreatedTemplateEvent(
   endpointId: Bytes,
   parameters: Bytes
 ): CreatedTemplate {
-  let createdTemplateEvent = changetype<CreatedTemplate>(newMockEvent())
+  let createdTemplateEvent = changetype<CreatedTemplate>(newMockEvent());
 
-  createdTemplateEvent.parameters = new Array()
+  createdTemplateEvent.parameters = new Array();
 
   createdTemplateEvent.parameters.push(
-    new ethereum.EventParam(
-      "templateId",
-      ethereum.Value.fromFixedBytes(templateId)
-    )
-  )
+    new ethereum.EventParam('templateId', ethereum.Value.fromFixedBytes(templateId))
+  );
+  createdTemplateEvent.parameters.push(new ethereum.EventParam('airnode', ethereum.Value.fromAddress(airnode)));
   createdTemplateEvent.parameters.push(
-    new ethereum.EventParam("airnode", ethereum.Value.fromAddress(airnode))
-  )
-  createdTemplateEvent.parameters.push(
-    new ethereum.EventParam(
-      "endpointId",
-      ethereum.Value.fromFixedBytes(endpointId)
-    )
-  )
-  createdTemplateEvent.parameters.push(
-    new ethereum.EventParam("parameters", ethereum.Value.fromBytes(parameters))
-  )
+    new ethereum.EventParam('endpointId', ethereum.Value.fromFixedBytes(endpointId))
+  );
+  createdTemplateEvent.parameters.push(new ethereum.EventParam('parameters', ethereum.Value.fromBytes(parameters)));
 
-  return createdTemplateEvent
+  return createdTemplateEvent;
 }
 
-export function createFailedRequestEvent(
-  airnode: Address,
-  requestId: Bytes,
-  errorMessage: string
-): FailedRequest {
-  let failedRequestEvent = changetype<FailedRequest>(newMockEvent())
+export function createFailedRequestEvent(airnode: Address, requestId: Bytes, errorMessage: string): FailedRequest {
+  let failedRequestEvent = changetype<FailedRequest>(newMockEvent());
 
-  failedRequestEvent.parameters = new Array()
+  failedRequestEvent.parameters = new Array();
 
-  failedRequestEvent.parameters.push(
-    new ethereum.EventParam("airnode", ethereum.Value.fromAddress(airnode))
-  )
-  failedRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "requestId",
-      ethereum.Value.fromFixedBytes(requestId)
-    )
-  )
-  failedRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "errorMessage",
-      ethereum.Value.fromString(errorMessage)
-    )
-  )
+  failedRequestEvent.parameters.push(new ethereum.EventParam('airnode', ethereum.Value.fromAddress(airnode)));
+  failedRequestEvent.parameters.push(new ethereum.EventParam('requestId', ethereum.Value.fromFixedBytes(requestId)));
+  failedRequestEvent.parameters.push(new ethereum.EventParam('errorMessage', ethereum.Value.fromString(errorMessage)));
 
-  return failedRequestEvent
+  return failedRequestEvent;
 }
 
-export function createFulfilledRequestEvent(
-  airnode: Address,
-  requestId: Bytes,
-  data: Bytes
-): FulfilledRequest {
-  let fulfilledRequestEvent = changetype<FulfilledRequest>(newMockEvent())
+export function createFulfilledRequestEvent(airnode: Address, requestId: Bytes, data: Bytes): FulfilledRequest {
+  let fulfilledRequestEvent = changetype<FulfilledRequest>(newMockEvent());
 
-  fulfilledRequestEvent.parameters = new Array()
+  fulfilledRequestEvent.parameters = new Array();
 
-  fulfilledRequestEvent.parameters.push(
-    new ethereum.EventParam("airnode", ethereum.Value.fromAddress(airnode))
-  )
-  fulfilledRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "requestId",
-      ethereum.Value.fromFixedBytes(requestId)
-    )
-  )
-  fulfilledRequestEvent.parameters.push(
-    new ethereum.EventParam("data", ethereum.Value.fromBytes(data))
-  )
+  fulfilledRequestEvent.parameters.push(new ethereum.EventParam('airnode', ethereum.Value.fromAddress(airnode)));
+  fulfilledRequestEvent.parameters.push(new ethereum.EventParam('requestId', ethereum.Value.fromFixedBytes(requestId)));
+  fulfilledRequestEvent.parameters.push(new ethereum.EventParam('data', ethereum.Value.fromBytes(data)));
 
-  return fulfilledRequestEvent
+  return fulfilledRequestEvent;
 }
 
 export function createFulfilledWithdrawalEvent(
@@ -103,33 +64,23 @@ export function createFulfilledWithdrawalEvent(
   sponsorWallet: Address,
   amount: BigInt
 ): FulfilledWithdrawal {
-  let fulfilledWithdrawalEvent = changetype<FulfilledWithdrawal>(newMockEvent())
+  let fulfilledWithdrawalEvent = changetype<FulfilledWithdrawal>(newMockEvent());
 
-  fulfilledWithdrawalEvent.parameters = new Array()
+  fulfilledWithdrawalEvent.parameters = new Array();
 
+  fulfilledWithdrawalEvent.parameters.push(new ethereum.EventParam('airnode', ethereum.Value.fromAddress(airnode)));
+  fulfilledWithdrawalEvent.parameters.push(new ethereum.EventParam('sponsor', ethereum.Value.fromAddress(sponsor)));
   fulfilledWithdrawalEvent.parameters.push(
-    new ethereum.EventParam("airnode", ethereum.Value.fromAddress(airnode))
-  )
+    new ethereum.EventParam('withdrawalRequestId', ethereum.Value.fromFixedBytes(withdrawalRequestId))
+  );
   fulfilledWithdrawalEvent.parameters.push(
-    new ethereum.EventParam("sponsor", ethereum.Value.fromAddress(sponsor))
-  )
+    new ethereum.EventParam('sponsorWallet', ethereum.Value.fromAddress(sponsorWallet))
+  );
   fulfilledWithdrawalEvent.parameters.push(
-    new ethereum.EventParam(
-      "withdrawalRequestId",
-      ethereum.Value.fromFixedBytes(withdrawalRequestId)
-    )
-  )
-  fulfilledWithdrawalEvent.parameters.push(
-    new ethereum.EventParam(
-      "sponsorWallet",
-      ethereum.Value.fromAddress(sponsorWallet)
-    )
-  )
-  fulfilledWithdrawalEvent.parameters.push(
-    new ethereum.EventParam("amount", ethereum.Value.fromUnsignedBigInt(amount))
-  )
+    new ethereum.EventParam('amount', ethereum.Value.fromUnsignedBigInt(amount))
+  );
 
-  return fulfilledWithdrawalEvent
+  return fulfilledWithdrawalEvent;
 }
 
 export function createMadeFullRequestEvent(
@@ -145,66 +96,33 @@ export function createMadeFullRequestEvent(
   fulfillFunctionId: Bytes,
   parameters: Bytes
 ): MadeFullRequest {
-  let madeFullRequestEvent = changetype<MadeFullRequest>(newMockEvent())
+  let madeFullRequestEvent = changetype<MadeFullRequest>(newMockEvent());
 
-  madeFullRequestEvent.parameters = new Array()
+  madeFullRequestEvent.parameters = new Array();
 
+  madeFullRequestEvent.parameters.push(new ethereum.EventParam('airnode', ethereum.Value.fromAddress(airnode)));
+  madeFullRequestEvent.parameters.push(new ethereum.EventParam('requestId', ethereum.Value.fromFixedBytes(requestId)));
   madeFullRequestEvent.parameters.push(
-    new ethereum.EventParam("airnode", ethereum.Value.fromAddress(airnode))
-  )
+    new ethereum.EventParam('requesterRequestCount', ethereum.Value.fromUnsignedBigInt(requesterRequestCount))
+  );
+  madeFullRequestEvent.parameters.push(new ethereum.EventParam('chainId', ethereum.Value.fromUnsignedBigInt(chainId)));
+  madeFullRequestEvent.parameters.push(new ethereum.EventParam('requester', ethereum.Value.fromAddress(requester)));
   madeFullRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "requestId",
-      ethereum.Value.fromFixedBytes(requestId)
-    )
-  )
+    new ethereum.EventParam('endpointId', ethereum.Value.fromFixedBytes(endpointId))
+  );
+  madeFullRequestEvent.parameters.push(new ethereum.EventParam('sponsor', ethereum.Value.fromAddress(sponsor)));
   madeFullRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "requesterRequestCount",
-      ethereum.Value.fromUnsignedBigInt(requesterRequestCount)
-    )
-  )
+    new ethereum.EventParam('sponsorWallet', ethereum.Value.fromAddress(sponsorWallet))
+  );
   madeFullRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "chainId",
-      ethereum.Value.fromUnsignedBigInt(chainId)
-    )
-  )
+    new ethereum.EventParam('fulfillAddress', ethereum.Value.fromAddress(fulfillAddress))
+  );
   madeFullRequestEvent.parameters.push(
-    new ethereum.EventParam("requester", ethereum.Value.fromAddress(requester))
-  )
-  madeFullRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "endpointId",
-      ethereum.Value.fromFixedBytes(endpointId)
-    )
-  )
-  madeFullRequestEvent.parameters.push(
-    new ethereum.EventParam("sponsor", ethereum.Value.fromAddress(sponsor))
-  )
-  madeFullRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "sponsorWallet",
-      ethereum.Value.fromAddress(sponsorWallet)
-    )
-  )
-  madeFullRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "fulfillAddress",
-      ethereum.Value.fromAddress(fulfillAddress)
-    )
-  )
-  madeFullRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "fulfillFunctionId",
-      ethereum.Value.fromFixedBytes(fulfillFunctionId)
-    )
-  )
-  madeFullRequestEvent.parameters.push(
-    new ethereum.EventParam("parameters", ethereum.Value.fromBytes(parameters))
-  )
+    new ethereum.EventParam('fulfillFunctionId', ethereum.Value.fromFixedBytes(fulfillFunctionId))
+  );
+  madeFullRequestEvent.parameters.push(new ethereum.EventParam('parameters', ethereum.Value.fromBytes(parameters)));
 
-  return madeFullRequestEvent
+  return madeFullRequestEvent;
 }
 
 export function createMadeTemplateRequestEvent(
@@ -220,66 +138,37 @@ export function createMadeTemplateRequestEvent(
   fulfillFunctionId: Bytes,
   parameters: Bytes
 ): MadeTemplateRequest {
-  let madeTemplateRequestEvent = changetype<MadeTemplateRequest>(newMockEvent())
+  let madeTemplateRequestEvent = changetype<MadeTemplateRequest>(newMockEvent());
 
-  madeTemplateRequestEvent.parameters = new Array()
+  madeTemplateRequestEvent.parameters = new Array();
 
+  madeTemplateRequestEvent.parameters.push(new ethereum.EventParam('airnode', ethereum.Value.fromAddress(airnode)));
   madeTemplateRequestEvent.parameters.push(
-    new ethereum.EventParam("airnode", ethereum.Value.fromAddress(airnode))
-  )
+    new ethereum.EventParam('requestId', ethereum.Value.fromFixedBytes(requestId))
+  );
   madeTemplateRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "requestId",
-      ethereum.Value.fromFixedBytes(requestId)
-    )
-  )
+    new ethereum.EventParam('requesterRequestCount', ethereum.Value.fromUnsignedBigInt(requesterRequestCount))
+  );
   madeTemplateRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "requesterRequestCount",
-      ethereum.Value.fromUnsignedBigInt(requesterRequestCount)
-    )
-  )
+    new ethereum.EventParam('chainId', ethereum.Value.fromUnsignedBigInt(chainId))
+  );
+  madeTemplateRequestEvent.parameters.push(new ethereum.EventParam('requester', ethereum.Value.fromAddress(requester)));
   madeTemplateRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "chainId",
-      ethereum.Value.fromUnsignedBigInt(chainId)
-    )
-  )
+    new ethereum.EventParam('templateId', ethereum.Value.fromFixedBytes(templateId))
+  );
+  madeTemplateRequestEvent.parameters.push(new ethereum.EventParam('sponsor', ethereum.Value.fromAddress(sponsor)));
   madeTemplateRequestEvent.parameters.push(
-    new ethereum.EventParam("requester", ethereum.Value.fromAddress(requester))
-  )
+    new ethereum.EventParam('sponsorWallet', ethereum.Value.fromAddress(sponsorWallet))
+  );
   madeTemplateRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "templateId",
-      ethereum.Value.fromFixedBytes(templateId)
-    )
-  )
+    new ethereum.EventParam('fulfillAddress', ethereum.Value.fromAddress(fulfillAddress))
+  );
   madeTemplateRequestEvent.parameters.push(
-    new ethereum.EventParam("sponsor", ethereum.Value.fromAddress(sponsor))
-  )
-  madeTemplateRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "sponsorWallet",
-      ethereum.Value.fromAddress(sponsorWallet)
-    )
-  )
-  madeTemplateRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "fulfillAddress",
-      ethereum.Value.fromAddress(fulfillAddress)
-    )
-  )
-  madeTemplateRequestEvent.parameters.push(
-    new ethereum.EventParam(
-      "fulfillFunctionId",
-      ethereum.Value.fromFixedBytes(fulfillFunctionId)
-    )
-  )
-  madeTemplateRequestEvent.parameters.push(
-    new ethereum.EventParam("parameters", ethereum.Value.fromBytes(parameters))
-  )
+    new ethereum.EventParam('fulfillFunctionId', ethereum.Value.fromFixedBytes(fulfillFunctionId))
+  );
+  madeTemplateRequestEvent.parameters.push(new ethereum.EventParam('parameters', ethereum.Value.fromBytes(parameters)));
 
-  return madeTemplateRequestEvent
+  return madeTemplateRequestEvent;
 }
 
 export function createRequestedWithdrawalEvent(
@@ -288,30 +177,20 @@ export function createRequestedWithdrawalEvent(
   withdrawalRequestId: Bytes,
   sponsorWallet: Address
 ): RequestedWithdrawal {
-  let requestedWithdrawalEvent = changetype<RequestedWithdrawal>(newMockEvent())
+  let requestedWithdrawalEvent = changetype<RequestedWithdrawal>(newMockEvent());
 
-  requestedWithdrawalEvent.parameters = new Array()
+  requestedWithdrawalEvent.parameters = new Array();
 
+  requestedWithdrawalEvent.parameters.push(new ethereum.EventParam('airnode', ethereum.Value.fromAddress(airnode)));
+  requestedWithdrawalEvent.parameters.push(new ethereum.EventParam('sponsor', ethereum.Value.fromAddress(sponsor)));
   requestedWithdrawalEvent.parameters.push(
-    new ethereum.EventParam("airnode", ethereum.Value.fromAddress(airnode))
-  )
+    new ethereum.EventParam('withdrawalRequestId', ethereum.Value.fromFixedBytes(withdrawalRequestId))
+  );
   requestedWithdrawalEvent.parameters.push(
-    new ethereum.EventParam("sponsor", ethereum.Value.fromAddress(sponsor))
-  )
-  requestedWithdrawalEvent.parameters.push(
-    new ethereum.EventParam(
-      "withdrawalRequestId",
-      ethereum.Value.fromFixedBytes(withdrawalRequestId)
-    )
-  )
-  requestedWithdrawalEvent.parameters.push(
-    new ethereum.EventParam(
-      "sponsorWallet",
-      ethereum.Value.fromAddress(sponsorWallet)
-    )
-  )
+    new ethereum.EventParam('sponsorWallet', ethereum.Value.fromAddress(sponsorWallet))
+  );
 
-  return requestedWithdrawalEvent
+  return requestedWithdrawalEvent;
 }
 
 export function createSetSponsorshipStatusEvent(
@@ -319,24 +198,17 @@ export function createSetSponsorshipStatusEvent(
   requester: Address,
   sponsorshipStatus: boolean
 ): SetSponsorshipStatus {
-  let setSponsorshipStatusEvent = changetype<SetSponsorshipStatus>(
-    newMockEvent()
-  )
+  let setSponsorshipStatusEvent = changetype<SetSponsorshipStatus>(newMockEvent());
 
-  setSponsorshipStatusEvent.parameters = new Array()
+  setSponsorshipStatusEvent.parameters = new Array();
 
+  setSponsorshipStatusEvent.parameters.push(new ethereum.EventParam('sponsor', ethereum.Value.fromAddress(sponsor)));
   setSponsorshipStatusEvent.parameters.push(
-    new ethereum.EventParam("sponsor", ethereum.Value.fromAddress(sponsor))
-  )
+    new ethereum.EventParam('requester', ethereum.Value.fromAddress(requester))
+  );
   setSponsorshipStatusEvent.parameters.push(
-    new ethereum.EventParam("requester", ethereum.Value.fromAddress(requester))
-  )
-  setSponsorshipStatusEvent.parameters.push(
-    new ethereum.EventParam(
-      "sponsorshipStatus",
-      ethereum.Value.fromBoolean(sponsorshipStatus)
-    )
-  )
+    new ethereum.EventParam('sponsorshipStatus', ethereum.Value.fromBoolean(sponsorshipStatus))
+  );
 
-  return setSponsorshipStatusEvent
+  return setSponsorshipStatusEvent;
 }
