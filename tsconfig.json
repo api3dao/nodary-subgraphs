@@ -4,16 +4,15 @@
     "strictNullChecks": true,
     "sourceMap": true,
     "allowJs": true,
-    "target": "es2017",
+    "target": "ESNext",
     "outDir": ".build",
     "moduleResolution": "node",
     "noLib": false,
-    "lib": ["es2017"],
+    "lib": ["ESNext"],
     "rootDir": "./",
     "strict": true,
     "module": "commonjs",
     "esModuleInterop": true
   },
-  "extends": "@graphprotocol/graph-ts/types/tsconfig.base.json",
-  "include": ["subgraphs/*/src", "subgraphs/*/tests"]
+  "include": ["scripts/*"]
 }
