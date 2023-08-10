@@ -3,7 +3,14 @@ import { CHAINS } from '@api3/chains';
 import { AirnodeRrpAddresses } from '@api3/airnode-protocol';
 import { references as referencesV1 } from '@api3/airnode-protocol-v1';
 import { ContractMeta } from './types';
+import { readJsonFile } from './utils';
+import path from 'path';
 
+const deployedBlockNumbersV1 = readJsonFile(
+  path.join(__dirname, '..', 'node_modules/@api3/airnode-protocol-v1/deployments/deployment-block-numbers.json')
+);
+
+console.log(deployedBlockNumbersV1);
 const getEtherscanLikeAPIUrl = (networkAlias: string): string => {
   const chain = CHAINS.find(({ alias }) => alias === networkAlias);
   if (!chain)
@@ -115,7 +122,7 @@ export const prepareAirnodeRrpV0 = async (chainAlias: string): Promise<ContractM
   }
 };
 
-export const prepareApi3ServerV1 = async (chainAlias: string): Promise<ContractMeta> => {
+export const prepareApi3ServerV1 = (chainAlias: string): ContractMeta => {
   const chainId = getChainId(chainAlias);
 
   const address = referencesV1.Api3ServerV1[chainId];
@@ -124,16 +131,11 @@ export const prepareApi3ServerV1 = async (chainAlias: string): Promise<ContractM
     return;
   }
 
-  try {
-    const startBlock = await getStartBlockForContract(chainAlias, address);
-    return { address, startBlock };
-  } catch (error) {
-    console.log(`Failed to get startBlock for Api3ServerV1 on ${chainAlias}, skipping adding startBlock, ${error}`);
-    return { address };
-  }
+  const startBlock = deployedBlockNumbersV1.Api3ServerV1[chainId];
+  return { address, startBlock };
 };
 
-export const prepareOrderPayable = async (chainAlias: string): Promise<ContractMeta> => {
+export const prepareOrderPayable = (chainAlias: string): ContractMeta => {
   const chainId = getChainId(chainAlias);
 
   const address = referencesV1.OrderPayable[chainId];
@@ -142,29 +144,21 @@ export const prepareOrderPayable = async (chainAlias: string): Promise<ContractM
     return;
   }
 
-  try {
-    const startBlock = await getStartBlockForContract(chainAlias, address);
-    return { address, startBlock };
-  } catch (error) {
-    console.log(`Failed to get startBlock for OrderPayable on ${chainAlias}, skipping adding startBlock, ${error}`);
-    return { address };
-  }
+  const startBlock = deployedBlockNumbersV1.OrderPayable[chainId];
+  return { address, startBlock };
 };
 
-export const preparePrepaymentDepository = async (chainAlias: string): Promise<ContractMeta> => {
+export const preparePrepaymentDepository = (chainAlias: string): ContractMeta => {
   const chainId = getChainId(chainAlias);
 
   const address = referencesV1.PrepaymentDepository[chainId];
   if (!address) {
-    console.log(`PrepaymentDepository deployment not found for chain with the id ${chainId}, skipping adding PrepaymentDepository`);
+    console.log(
+      `PrepaymentDepository deployment not found for chain with the id ${chainId}, skipping adding PrepaymentDepository`
+    );
     return;
   }
 
-  try {
-    const startBlock = await getStartBlockForContract(chainAlias, address);
-    return { address, startBlock };
-  } catch (error) {
-    console.log(`Failed to get startBlock for PrepaymentDepository on ${chainAlias}, skipping adding startBlock, ${error}`);
-    return { address };
-  }
+  const startBlock = deployedBlockNumbersV1.PrepaymentDepository[chainId];
+  return { address, startBlock };
 };

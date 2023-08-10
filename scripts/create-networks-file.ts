@@ -48,12 +48,10 @@ else
 const main = async () => {
   const networkPromises = chainAliasesToInclude.map(async (chainAlias): Promise<[string, Network]> => {
     const AirnodeRrpV0 = await prepareAirnodeRrpV0(chainAlias);
-    await sleep(10000); // Most of block explorer API applies 1req/5sec while using without API-KEY
-    const Api3ServerV1 = await prepareApi3ServerV1(chainAlias);
-    await sleep(10000);
-    const OrderPayable = await prepareOrderPayable(chainAlias);
-    await sleep(10000);
-    const PrepaymentDepository = await preparePrepaymentDepository(chainAlias);
+    const Api3ServerV1 = prepareApi3ServerV1(chainAlias);
+    const OrderPayable = prepareOrderPayable(chainAlias);
+    const PrepaymentDepository = preparePrepaymentDepository(chainAlias);
+
     return [
       chainAlias,
       {
@@ -68,7 +66,7 @@ const main = async () => {
   const networksAsEntries = await Promise.all(networkPromises);
   const networks = Object.fromEntries(networksAsEntries);
 
-  await writeJsonFile('networks.json', JSON.stringify(networks));
+  await writeJsonFile('networks.json', networks);
 };
 
 main()

@@ -15,7 +15,7 @@
   },
   "avalanche-testnet": {
     "AirnodeRrpV0": { "address": "0x7f5AF7a37a33898544717AAa6c35c111dCe95b28" },
-    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76" }
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 19914010 }
   },
   "bsc": {
     "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 17087177 },
@@ -24,7 +24,7 @@
   },
   "bsc-testnet": {
     "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd" },
-    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76" }
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 28099298 }
   },
   "ethereum": {
     "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 14616838 },
@@ -54,12 +54,12 @@
   },
   "gnosis": {
     "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd" },
-    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76" },
-    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06" }
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 26975353 },
+    "OrderPayable": { "address": "0x045808285C69014Beb9f70447155A4c55376fc06", "startBlock": 28119552 }
   },
   "gnosis-testnet": {
     "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd" },
-    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76" }
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 2959487 }
   },
   "moonbeam": {
     "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 854061 },
@@ -68,7 +68,7 @@
   },
   "moonbeam-testnet": {
     "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd" },
-    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76" }
+    "Api3ServerV1": { "address": "0x3dEC619dc529363767dEe9E71d8dD1A5bc270D76", "startBlock": 3951904 }
   },
   "moonriver": {
     "AirnodeRrpV0": { "address": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd", "startBlock": 1723380 },
