@@ -346,16 +346,18 @@ export class TransactionReceipt extends Entity {
   get logs(): LogLoader {
     return new LogLoader(
       "TransactionReceipt",
-      this.get("id")!.toString(),
+      this.get("id")!
+        .toBytes()
+        .toHexString(),
       "logs"
     );
   }
 }
 
 export class Log extends Entity {
-  constructor(id: string) {
+  constructor(id: Bytes) {
     super();
-    this.set("id", Value.fromString(id));
+    this.set("id", Value.fromBytes(id));
   }
 
   save(): void {
@@ -363,32 +365,32 @@ export class Log extends Entity {
     assert(id != null, "Cannot save Log entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type Log must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.BYTES,
+        `Entities of type Log must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Log", id.toString(), this);
+      store.set("Log", id.toBytes().toHexString(), this);
     }
   }
 
-  static loadInBlock(id: string): Log | null {
-    return changetype<Log | null>(store.get_in_block("Log", id));
+  static loadInBlock(id: Bytes): Log | null {
+    return changetype<Log | null>(store.get_in_block("Log", id.toHexString()));
   }
 
-  static load(id: string): Log | null {
-    return changetype<Log | null>(store.get("Log", id));
+  static load(id: Bytes): Log | null {
+    return changetype<Log | null>(store.get("Log", id.toHexString()));
   }
 
-  get id(): string {
+  get id(): Bytes {
     let value = this.get("id");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
-      return value.toString();
+      return value.toBytes();
     }
   }
 
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
   }
 
   get logIndex(): BigInt {
@@ -462,9 +464,9 @@ export class Log extends Entity {
 }
 
 export class SetDapiName extends Entity {
-  constructor(id: string) {
+  constructor(id: Bytes) {
     super();
-    this.set("id", Value.fromString(id));
+    this.set("id", Value.fromBytes(id));
   }
 
   save(): void {
@@ -472,34 +474,36 @@ export class SetDapiName extends Entity {
     assert(id != null, "Cannot save SetDapiName entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type SetDapiName must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.BYTES,
+        `Entities of type SetDapiName must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("SetDapiName", id.toString(), this);
+      store.set("SetDapiName", id.toBytes().toHexString(), this);
     }
   }
 
-  static loadInBlock(id: string): SetDapiName | null {
+  static loadInBlock(id: Bytes): SetDapiName | null {
     return changetype<SetDapiName | null>(
-      store.get_in_block("SetDapiName", id)
+      store.get_in_block("SetDapiName", id.toHexString())
     );
   }
 
-  static load(id: string): SetDapiName | null {
-    return changetype<SetDapiName | null>(store.get("SetDapiName", id));
+  static load(id: Bytes): SetDapiName | null {
+    return changetype<SetDapiName | null>(
+      store.get("SetDapiName", id.toHexString())
+    );
   }
 
-  get id(): string {
+  get id(): Bytes {
     let value = this.get("id");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
-      return value.toString();
+      return value.toBytes();
     }
   }
 
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
   }
 
   get address(): Bytes {
@@ -545,43 +549,43 @@ export class SetDapiName extends Entity {
     }
   }
 
-  get dataFeedId(): string {
+  get dataFeedId(): Bytes {
     let value = this.get("dataFeedId");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
-      return value.toString();
+      return value.toBytes();
     }
   }
 
-  set dataFeedId(value: string) {
-    this.set("dataFeedId", Value.fromString(value));
+  set dataFeedId(value: Bytes) {
+    this.set("dataFeedId", Value.fromBytes(value));
   }
 
-  get dapiName(): string {
+  get dapiName(): Bytes {
     let value = this.get("dapiName");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
-      return value.toString();
+      return value.toBytes();
     }
   }
 
-  set dapiName(value: string) {
-    this.set("dapiName", Value.fromString(value));
+  set dapiName(value: Bytes) {
+    this.set("dapiName", Value.fromBytes(value));
   }
 
-  get sender(): string {
+  get sender(): Bytes {
     let value = this.get("sender");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
-      return value.toString();
+      return value.toBytes();
     }
   }
 
-  set sender(value: string) {
-    this.set("sender", Value.fromString(value));
+  set sender(value: Bytes) {
+    this.set("sender", Value.fromBytes(value));
   }
 
   get parameters(): Array<string> {
@@ -654,7 +658,7 @@ export class SetDapiName extends Entity {
   }
 }
 
-export class UpdatedBeaconSetWithBeacon extends Entity {
+export class UpdatedBeaconSetWithBeacons extends Entity {
   constructor(id: Bytes) {
     super();
     this.set("id", Value.fromBytes(id));
@@ -664,26 +668,30 @@ export class UpdatedBeaconSetWithBeacon extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save UpdatedBeaconSetWithBeacon entity without an ID"
+      "Cannot save UpdatedBeaconSetWithBeacons entity without an ID"
     );
     if (id) {
       assert(
         id.kind == ValueKind.BYTES,
-        `Entities of type UpdatedBeaconSetWithBeacon must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type UpdatedBeaconSetWithBeacons must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("UpdatedBeaconSetWithBeacon", id.toBytes().toHexString(), this);
+      store.set(
+        "UpdatedBeaconSetWithBeacons",
+        id.toBytes().toHexString(),
+        this
+      );
     }
   }
 
-  static loadInBlock(id: Bytes): UpdatedBeaconSetWithBeacon | null {
-    return changetype<UpdatedBeaconSetWithBeacon | null>(
-      store.get_in_block("UpdatedBeaconSetWithBeacon", id.toHexString())
+  static loadInBlock(id: Bytes): UpdatedBeaconSetWithBeacons | null {
+    return changetype<UpdatedBeaconSetWithBeacons | null>(
+      store.get_in_block("UpdatedBeaconSetWithBeacons", id.toHexString())
     );
   }
 
-  static load(id: Bytes): UpdatedBeaconSetWithBeacon | null {
-    return changetype<UpdatedBeaconSetWithBeacon | null>(
-      store.get("UpdatedBeaconSetWithBeacon", id.toHexString())
+  static load(id: Bytes): UpdatedBeaconSetWithBeacons | null {
+    return changetype<UpdatedBeaconSetWithBeacons | null>(
+      store.get("UpdatedBeaconSetWithBeacons", id.toHexString())
     );
   }
 

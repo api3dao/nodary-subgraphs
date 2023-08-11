@@ -5,40 +5,28 @@ import {
   UpdatedOevProxyBeaconSetWithSignedData as UpdatedOevProxyBeaconSetWithSignedDataEvent,
   UpdatedOevProxyBeaconWithSignedData as UpdatedOevProxyBeaconWithSignedDataEvent,
   Withdrew as WithdrewEvent,
-} from "../generated/Api3ServerV1/Api3ServerV1";
+} from '../generated/Api3ServerV1/Api3ServerV1';
 import {
   SetDapiName,
   Transaction,
   TransactionReceipt,
   Log,
-  UpdatedBeaconSetWithBeacon,
+  UpdatedBeaconSetWithBeacons,
   UpdatedBeaconWithSignedData,
   UpdatedOevProxyBeaconSetWithSignedData,
   UpdatedOevProxyBeaconWithSignedData,
   Withdrew,
-} from "../generated/schema";
-import {
-  ethereum,
-  Bytes,
-  Wrapped,
-  ByteArray,
-  BigInt,
-  crypto,
-} from "@graphprotocol/graph-ts";
+} from '../generated/schema';
+import { ethereum, Bytes, Wrapped, ByteArray, BigInt, crypto } from '@graphprotocol/graph-ts';
 
 // utils
 
-export function generateLogId(
-  transactionHash: Bytes,
-  logIndex: BigInt
-): string {
+export function generateLogId(transactionHash: Bytes, logIndex: BigInt): string {
   var id = transactionHash.toHex() + Bytes.fromBigInt(logIndex).toHex();
   return crypto.keccak256(ByteArray.fromHexString(id)).toHex();
 }
 
-export function createTransactionEntity(
-  transaction: ethereum.Transaction
-): Transaction {
+export function createTransactionEntity(transaction: ethereum.Transaction): Transaction {
   let entity = Transaction.load(transaction.hash);
   if (!entity) {
     entity = new Transaction(transaction.hash);
@@ -81,38 +69,39 @@ export function createTransactionReceiptEntity(
   return entity;
 }
 
-export function createLogEntity(
-  transactionHash: Bytes,
-  log: ethereum.Log
-): void {
-  const entity = new Log(generateLogId(transactionHash, log.logIndex));
-  entity.logIndex = log.logIndex;
-  entity.data = log.data;
-  entity.topics = log.topics;
-  const removed =
-    log.removed != null ? (log.removed as Wrapped<bool>).inner : false;
-  if (typeof removed === "number") {
-    entity.removed = (removed as number) === 1;
-  }
-  if (typeof removed === "boolean") {
-    entity.removed = (removed as boolean) === true;
-  }
+export function createLogEntity(transactionHash: Bytes, log: ethereum.Log): Log {
+  const logId = transactionHash.concatI32(log.logIndex.toI32());
 
-  entity.transactionReceipt = transactionHash;
-  entity.save();
+  let entity = Log.load(logId);
+  if (!entity) {
+    entity = new Log(logId);
+    entity.logIndex = log.logIndex;
+    entity.data = log.data;
+    entity.topics = log.topics;
+    const removed = log.removed != null ? (log.removed as Wrapped<bool>).inner : false;
+    if (typeof removed === 'number') {
+      entity.removed = (removed as number) === 1;
+    }
+    if (typeof removed === 'boolean') {
+      entity.removed = (removed as boolean) === true;
+    }
+    entity.transactionReceipt = transactionHash;
+    entity.save();
+  }
+  return entity;
 }
 
 // handlers
 
 export function handleSetDapiName(event: SetDapiNameEvent): void {
-  let entity = new SetDapiName(event.transaction.hash.toHex());
+  let entity = new SetDapiName(event.transaction.hash.concatI32(event.logIndex.toI32()));
   entity.address = event.address;
   entity.logIndex = event.logIndex;
   entity.logType = event.logType;
-  entity.dataFeedId = event.params.dataFeedId.toHex();
-  entity.dapiName = event.params.dapiName.toHex();
-  entity.sender = event.params.sender.toHex();
-  entity.parameters = [entity.dataFeedId, entity.dapiName, entity.sender];
+  entity.dataFeedId = event.params.dataFeedId;
+  entity.dapiName = event.params.dapiName;
+  entity.sender = event.params.sender;
+  entity.parameters = [entity.dataFeedId.toHexString(), entity.dapiName.toHexString(), entity.sender.toHexString()];
 
   entity.blockNumber = event.block.number;
   entity.blockTimestamp = event.block.timestamp;
@@ -128,23 +117,15 @@ export function handleSetDapiName(event: SetDapiNameEvent): void {
   entity.save();
 }
 
-export function handleUpdatedBeaconSetWithBeacons(
-  event: UpdatedBeaconSetWithBeaconsEvent
-): void {
-  let entity = new UpdatedBeaconSetWithBeacon(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
+export function handleUpdatedBeaconSetWithBeacons(event: UpdatedBeaconSetWithBeaconsEvent): void {
+  let entity = new UpdatedBeaconSetWithBeacons(event.transaction.hash.concatI32(event.logIndex.toI32()));
   entity.address = event.address;
   entity.logIndex = event.logIndex;
   entity.logType = event.logType;
   entity.beaconSetId = event.params.beaconSetId;
   entity.value = event.params.value;
   entity.timestamp = event.params.timestamp;
-  entity.parameters = [
-    entity.beaconSetId.toHexString(),
-    entity.value.toString(),
-    entity.timestamp.toString(),
-  ];
+  entity.parameters = [entity.beaconSetId.toHexString(), entity.value.toString(), entity.timestamp.toString()];
 
   entity.blockNumber = event.block.number;
   entity.blockTimestamp = event.block.timestamp;
@@ -160,23 +141,15 @@ export function handleUpdatedBeaconSetWithBeacons(
   entity.save();
 }
 
-export function handleUpdatedBeaconWithSignedData(
-  event: UpdatedBeaconWithSignedDataEvent
-): void {
-  let entity = new UpdatedBeaconWithSignedData(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
+export function handleUpdatedBeaconWithSignedData(event: UpdatedBeaconWithSignedDataEvent): void {
+  let entity = new UpdatedBeaconWithSignedData(event.transaction.hash.concatI32(event.logIndex.toI32()));
   entity.address = event.address;
   entity.logIndex = event.logIndex;
   entity.logType = event.logType;
   entity.beaconId = event.params.beaconId;
   entity.value = event.params.value;
   entity.timestamp = event.params.timestamp;
-  entity.parameters = [
-    entity.beaconId.toHexString(),
-    entity.value.toString(),
-    entity.timestamp.toString(),
-  ];
+  entity.parameters = [entity.beaconId.toHexString(), entity.value.toString(), entity.timestamp.toString()];
 
   entity.blockNumber = event.block.number;
   entity.blockTimestamp = event.block.timestamp;
@@ -192,12 +165,8 @@ export function handleUpdatedBeaconWithSignedData(
   entity.save();
 }
 
-export function handleUpdatedOevProxyBeaconSetWithSignedData(
-  event: UpdatedOevProxyBeaconSetWithSignedDataEvent
-): void {
-  let entity = new UpdatedOevProxyBeaconSetWithSignedData(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
+export function handleUpdatedOevProxyBeaconSetWithSignedData(event: UpdatedOevProxyBeaconSetWithSignedDataEvent): void {
+  let entity = new UpdatedOevProxyBeaconSetWithSignedData(event.transaction.hash.concatI32(event.logIndex.toI32()));
   entity.address = event.address;
   entity.logIndex = event.logIndex;
   entity.logType = event.logType;
@@ -228,12 +197,8 @@ export function handleUpdatedOevProxyBeaconSetWithSignedData(
   entity.save();
 }
 
-export function handleUpdatedOevProxyBeaconWithSignedData(
-  event: UpdatedOevProxyBeaconWithSignedDataEvent
-): void {
-  let entity = new UpdatedOevProxyBeaconWithSignedData(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
+export function handleUpdatedOevProxyBeaconWithSignedData(event: UpdatedOevProxyBeaconWithSignedDataEvent): void {
+  let entity = new UpdatedOevProxyBeaconWithSignedData(event.transaction.hash.concatI32(event.logIndex.toI32()));
   entity.address = event.address;
   entity.logIndex = event.logIndex;
   entity.logType = event.logType;
@@ -265,9 +230,7 @@ export function handleUpdatedOevProxyBeaconWithSignedData(
 }
 
 export function handleWithdrew(event: WithdrewEvent): void {
-  let entity = new Withdrew(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
+  let entity = new Withdrew(event.transaction.hash.concatI32(event.logIndex.toI32()));
   entity.address = event.address;
   entity.logIndex = event.logIndex;
   entity.logType = event.logType;

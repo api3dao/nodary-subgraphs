@@ -25,7 +25,7 @@ type TransactionReceipt @entity(immutable: true) {
 }
 
 type Log @entity {
-  id: ID!
+  id: Bytes!
   logIndex: BigInt!
   data: Bytes!
   topics: [Bytes!]
@@ -34,13 +34,13 @@ type Log @entity {
 }
 
 type SetDapiName @entity(immutable: true) {
-  id: ID!
+  id: Bytes!
   address: Bytes!
   logIndex: BigInt!
   logType: String
-  dataFeedId: String!
-  dapiName: String!
-  sender: String!
+  dataFeedId: Bytes!
+  dapiName: Bytes!
+  sender: Bytes!
   parameters: [String!]!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
@@ -48,7 +48,7 @@ type SetDapiName @entity(immutable: true) {
   transactionReceipt: TransactionReceipt
 }
 
-type UpdatedBeaconSetWithBeacon @entity(immutable: true) {
+type UpdatedBeaconSetWithBeacons @entity(immutable: true) {
   id: Bytes!
   address: Bytes!
   logIndex: BigInt!
