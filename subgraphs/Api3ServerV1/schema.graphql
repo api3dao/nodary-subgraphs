@@ -1,63 +1,128 @@
-type SetDapiName @entity(immutable: true) {
+type Transaction @entity(immutable: true) {
   id: Bytes!
-  dataFeedId: Bytes! # bytes32
-  dapiName: Bytes! # bytes32
-  sender: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  hash: Bytes!
+  index: BigInt!
+  from: Bytes!
+  to: Bytes
+  value: BigInt!
+  gasLimit: BigInt!
+  gasPrice: BigInt!
+  input: Bytes!
+  nonce: BigInt!
 }
 
-type UpdatedBeaconSetWithBeacons @entity(immutable: true) {
+type TransactionReceipt @entity(immutable: true) {
   id: Bytes!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  cumulativeGasUsed: BigInt
+  gasUsed: BigInt!
+  contractAddress: Bytes
+  status: BigInt
+  root: Bytes
+  logsBloom: Bytes
+  logs: [Log!]! @derivedFrom(field: "transactionReceipt")
+}
+
+type Log @entity {
+  id: ID!
+  logIndex: BigInt!
+  data: Bytes!
+  topics: [Bytes!]
+  removed: Boolean @nullable
+  transactionReceipt: TransactionReceipt!
+}
+
+type SetDapiName @entity(immutable: true) {
+  id: ID!
+  address: Bytes!
+  logIndex: BigInt!
+  logType: String
+  dataFeedId: String!
+  dapiName: String!
+  sender: String!
+  parameters: [String!]!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transaction: Transaction!
+  transactionReceipt: TransactionReceipt
+}
+
+type UpdatedBeaconSetWithBeacon @entity(immutable: true) {
+  id: Bytes!
+  address: Bytes!
+  logIndex: BigInt!
+  logType: String
   beaconSetId: Bytes! # bytes32
   value: BigInt! # int224
   timestamp: BigInt! # uint32
+  parameters: [String!]!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  transaction: Transaction!
+  transactionReceipt: TransactionReceipt
 }
 
 type UpdatedBeaconWithSignedData @entity(immutable: true) {
   id: Bytes!
+  address: Bytes!
+  logIndex: BigInt!
+  logType: String
   beaconId: Bytes! # bytes32
   value: BigInt! # int224
   timestamp: BigInt! # uint32
+  parameters: [String!]!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  transaction: Transaction!
+  transactionReceipt: TransactionReceipt
 }
 
 type UpdatedOevProxyBeaconSetWithSignedData @entity(immutable: true) {
   id: Bytes!
+  address: Bytes!
+  logIndex: BigInt!
+  logType: String
   beaconSetId: Bytes! # bytes32
   proxy: Bytes! # address
   updateId: Bytes! # bytes32
   value: BigInt! # int224
   timestamp: BigInt! # uint32
+  parameters: [String!]!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  transaction: Transaction!
+  transactionReceipt: TransactionReceipt
 }
 
 type UpdatedOevProxyBeaconWithSignedData @entity(immutable: true) {
   id: Bytes!
+  address: Bytes!
+  logIndex: BigInt!
+  logType: String
   beaconId: Bytes! # bytes32
   proxy: Bytes! # address
   updateId: Bytes! # bytes32
   value: BigInt! # int224
   timestamp: BigInt! # uint32
+  parameters: [String!]!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  transaction: Transaction!
+  transactionReceipt: TransactionReceipt
 }
 
 type Withdrew @entity(immutable: true) {
   id: Bytes!
+  address: Bytes!
+  logIndex: BigInt!
+  logType: String
   oevProxy: Bytes! # address
   oevBeneficiary: Bytes! # address
   amount: BigInt! # uint256
+  parameters: [String!]!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  transaction: Transaction!
+  transactionReceipt: TransactionReceipt
 }
