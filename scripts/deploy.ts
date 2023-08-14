@@ -7,6 +7,7 @@ const main = async () => {
   const preferredChain = process.env.NETWORK;
   const nodeUrl = process.env.NODE;
   const ipfsUrl = process.env.IPFS;
+  const preferredContracts = process.env.CONTRACTS; // Comma separated contract names
 
   if (!preferredChain) throw new Error(`Environment variable 'NETWORK' is required to be provided`);
   if (!nodeUrl) throw new Error(`Environment variable 'NODE' is required to be provided`);
@@ -19,7 +20,11 @@ const main = async () => {
 
   const availableContracts = Object.keys(networks[preferredChain]);
 
-  for (const contractName of availableContracts) {
+  const filteredContracts = preferredContracts
+    ? availableContracts.filter((contractName) => preferredContracts.split(',').includes(contractName))
+    : availableContracts;
+
+  for (const contractName of filteredContracts) {
     const folderPath = path.join(__dirname, '..', 'subgraphs', contractName);
     // Fetch subgraph.template.yaml for the contract
     const subgraphTemplate = readYamlFile(path.join(folderPath, 'subgraph.template.yaml'));
@@ -36,6 +41,7 @@ const main = async () => {
 
     // Register subgraph with a name <chainName>/<contractName>
     execSync(`npx graph create ${preferredChain}/${contractName} --node ${nodeUrl}`);
+    console.log(`${preferredChain}/${contractName} was registered`);
     // Deploy registered subgraph
     execSync(
       `npx graph deploy ${preferredChain}/${contractName} ${path.join(
@@ -47,6 +53,7 @@ const main = async () => {
         'networks.json'
       )}`
     );
+    console.log(`${preferredChain}/${contractName} was deployed`);
   }
 };
 
